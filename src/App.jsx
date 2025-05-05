@@ -4,13 +4,14 @@ import chef from "./assets/chef.gif"
 import Recipe from './Recipe'
 import Ingredient from './Ingredient'
 import FormInput from './FormInput'
+import { getRecipeFromMistral } from './AIConfig'
 function App() {
 const [ingredient,setIngredient] = useState([])
-const [recipeShown, setRecipeShown] = useState(false)
-const AIrespond = () => {
-  setRecipeShown(prevShown => !prevShown)
+const [recipe, setRecipe] = useState("")
+const AIrespond =  async () => {
+  const respondFromAI = await getRecipeFromMistral(ingredient)
+  setRecipe(respondFromAI)
 } 
-
 return (
   <>
     <header>
@@ -20,7 +21,7 @@ return (
     <section className='chefClaudeSection'> 
       <FormInput setIngredient={setIngredient} />
       <Ingredient ingredient={ingredient} AIrespond={AIrespond} />
-      <Recipe recipeShown={recipeShown} />
+      <Recipe recipe={recipe} />
     </section>
   
   </>
