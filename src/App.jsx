@@ -8,6 +8,7 @@ import { getRecipeFromMistral } from './AIConfig'
 function App() {
 const [ingredient,setIngredient] = useState([])
 const [recipe, setRecipe] = useState("")
+
 const AIrespond =  async () => {
   const respondFromAI = await getRecipeFromMistral(ingredient)
   setRecipe(respondFromAI)
